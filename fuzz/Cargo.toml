@@ -1,0 +1,30 @@
+[package]
+name = "webp-diff"
+version = "0.1.0"
+edition = "2021"
+description = "Differential testing of WebP decoders: Lean (verified) vs libwebp vs image-webp"
+build = "build.rs"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "webp-diff-run"
+path = "src/bin/webp-diff-run.rs"
+
+[[bin]]
+name = "webp-diff-mutate"
+path = "src/bin/webp-diff-mutate.rs"
+
+[dependencies]
+image-webp = { path = "../image-webp" }
+sha1_smol = "1"
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
+
+[workspace]
+exclude = ["fuzz"]
+
+[profile.release]
+debug = true

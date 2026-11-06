@@ -1,0 +1,1037 @@
+files: 80  decoders: dixie,dixie_asan,lean_spec,lean_impl,lean_libwebp,dwebp,dwebp_noasm,libwebp_vp8  time: 1.0s
+
+== per-decoder status ==
+  dixie          ok=77  reject=3
+  dixie_asan     ok=77  reject=3
+  lean_spec      ok=77  reject=3
+  lean_impl      ok=77  reject=3
+  lean_libwebp   ok=73  reject=7
+  dwebp          ok=73  reject=7
+  dwebp_noasm    ok=73  reject=7
+  libwebp_vp8    ok=73  reject=7
+
+== per-decoder rejection reasons ==
+  dixie:
+         3  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+  dixie_asan:
+         3  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+  lean_spec:
+         3  decode error: VP8: unsupported bitstream (reserved bits not supported)
+  lean_impl:
+         3  decode error: VP8: unsupported bitstream (reserved bits not supported)
+  lean_libwebp:
+         3  decode error: VP8: premature end-of-file encountered
+         3  decode error: VP8: cannot parse partitions
+         1  decode error: VP8: cannot parse partitions (not enough data)
+  dwebp:
+         4  7(NOT_ENOUGH_DATA)
+         3  3(BITSTREAM_ERROR)
+  dwebp_noasm:
+         4  7(NOT_ENOUGH_DATA)
+         3  3(BITSTREAM_ERROR)
+  libwebp_vp8:
+         3  7 Premature end-of-file encountered.
+         3  3 cannot parse partitions
+         1  7 cannot parse partitions
+
+== pair A=dixie B=dixie_asan ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_spec ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_impl ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_libwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: decode error: VP8: cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie B=dwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie B=dwebp_noasm ==
+  both_ok_same       46
+  both_ok_nocmp      0
+  both_ok_diff       24
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [12] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 207, "maxdiff": 255, "planes": "Y", "first": ["Y", 52, 44, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 116, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 48, 255, 0]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 255, "planes": "Y", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 37, "maxdiff": 255, "planes": "Y", "first": ["Y", 28, 124, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 29, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 104, 112, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 205, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 92, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 19, "maxdiff": 255, "planes": "Y", "first": ["Y", 44, 36, 255, 0]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [7] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [2] pixels planes=U
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2084, "maxdiff": 255, "planes": "U", "first": ["U", 24, 0, 217, 249]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1793, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 28, 11, 0, 255]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "VY", "first": ["Y", 24, 44, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      70
+  both_ok_diff       0
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3 cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: 7 cannot parse partitions
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie_asan B=lean_spec ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=dixie_asan B=lean_impl ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=dixie_asan B=lean_libwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: decode error: VP8: cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie_asan B=dwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie_asan B=dwebp_noasm ==
+  both_ok_same       46
+  both_ok_nocmp      0
+  both_ok_diff       24
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [12] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 207, "maxdiff": 255, "planes": "Y", "first": ["Y", 52, 44, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 116, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 48, 255, 0]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 255, "planes": "Y", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 37, "maxdiff": 255, "planes": "Y", "first": ["Y", 28, 124, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 29, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 104, 112, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 205, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 92, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 19, "maxdiff": 255, "planes": "Y", "first": ["Y", 44, 36, 255, 0]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [7] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [2] pixels planes=U
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2084, "maxdiff": 255, "planes": "U", "first": ["U", 24, 0, 217, 249]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1793, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 28, 11, 0, 255]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "VY", "first": ["Y", 24, 44, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=dixie_asan B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      70
+  both_ok_diff       0
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3 cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: 7 cannot parse partitions
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_spec B=lean_impl ==
+  both_ok_same       77
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        3
+  crash_or_timeout   0
+
+== pair A=lean_spec B=lean_libwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: decode error: VP8: cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_spec B=dwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_spec B=dwebp_noasm ==
+  both_ok_same       46
+  both_ok_nocmp      0
+  both_ok_diff       24
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [12] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 207, "maxdiff": 255, "planes": "Y", "first": ["Y", 52, 44, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 116, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 48, 255, 0]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 255, "planes": "Y", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 37, "maxdiff": 255, "planes": "Y", "first": ["Y", 28, 124, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 29, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 104, 112, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 205, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 92, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 19, "maxdiff": 255, "planes": "Y", "first": ["Y", 44, 36, 255, 0]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [7] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [2] pixels planes=U
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2084, "maxdiff": 255, "planes": "U", "first": ["U", 24, 0, 217, 249]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1793, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 28, 11, 0, 255]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "VY", "first": ["Y", 24, 44, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_spec B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      70
+  both_ok_diff       0
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3 cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: 7 cannot parse partitions
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_impl B=lean_libwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: decode error: VP8: cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_impl B=dwebp ==
+  both_ok_same       39
+  both_ok_nocmp      0
+  both_ok_diff       31
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [15] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 265, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 44, 0, 255]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 95, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 215, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 120, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 152, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 202, 234]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 255, 0]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 255, 0]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 255, 0]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 255, 0]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 14, 46]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 605, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 255, 0]}
+    [8] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 0, 255]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 150, "maxdiff": 255, "planes": "U", "first": ["U", 56, 48, 0, 1]}
+    [3] pixels planes=UY
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 151, "maxdiff": 255, "planes": "UY", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 669, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 0, 255]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 121, 29, 255, 0]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_impl B=dwebp_noasm ==
+  both_ok_same       46
+  both_ok_nocmp      0
+  both_ok_diff       24
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [12] pixels planes=Y
+       corpus/crafted/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       corpus/crafted/lf_clamp_3.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 11, "planes": "Y", "first": ["Y", 47, 22, 111, 105]}
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 134, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 207, "maxdiff": 255, "planes": "Y", "first": ["Y", 52, 44, 255, 0]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 116, "maxdiff": 255, "planes": "Y", "first": ["Y", 24, 48, 255, 0]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 255, "planes": "Y", "first": ["Y", 16, 44, 0, 255]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 37, "maxdiff": 255, "planes": "Y", "first": ["Y", 28, 124, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 29, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 104, 112, 255, 0]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 205, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 92, 255, 0]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 19, "maxdiff": 255, "planes": "Y", "first": ["Y", 44, 36, 255, 0]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [7] pixels planes=UVY
+       corpus/crafted/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       corpus/crafted/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       corpus/crafted/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       corpus/crafted/lf_clamp_2.vp8 {"kind": "pixels", "ndiff": 11974, "maxdiff": 29, "planes": "UVY", "first": ["Y", 77, 0, 255, 254]}
+       corpus/crafted/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       corpus/crafted/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       corpus/crafted/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [2] pixels planes=U
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 28, 16, 0, 255]}
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2084, "maxdiff": 255, "planes": "U", "first": ["U", 24, 0, 217, 249]}
+    [1] pixels planes=UV
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1793, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 28, 11, 0, 255]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "VY", "first": ["Y", 24, 44, 0, 255]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3(BITSTREAM_ERROR)
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_impl B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      70
+  both_ok_diff       0
+  A_ok_B_reject      7
+  A_reject_B_ok      3
+  both_reject        0
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       corpus/crafted/allskip_parts2_empty.vp8
+       corpus/crafted/allskip_parts4_empty.vp8
+       corpus/crafted/allskip_parts8_empty.vp8
+    [3] B: 3 cannot parse partitions
+       corpus/crafted/parts8_one_row_unused_ff.vp8
+       corpus/crafted/bigcoef_01.vp8
+       corpus/crafted/bigcoef_28.vp8
+    [1] B: 7 cannot parse partitions
+       corpus/crafted/parts8_one_row_last_empty.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       corpus/crafted/reserved_cs0_clamp1.vp8
+       corpus/crafted/reserved_cs1_clamp0.vp8
+       corpus/crafted/reserved_cs1_clamp1.vp8
+
+== pair A=lean_libwebp B=dwebp ==
+  both_ok_same       73
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=lean_libwebp B=dwebp_noasm ==
+  both_ok_same       50
+  both_ok_nocmp      0
+  both_ok_diff       23
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [13] pixels planes=Y
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 108, "maxdiff": 255, "planes": "Y", "first": ["Y", 25, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 208, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 0, 255]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 255, 0]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 189, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 234, 202]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 0, 255]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 0, 255]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 0, 255]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 46, 14]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 0, 255]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 210, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 0, 255]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 620, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 0, 255]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 255, 0]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 29, 16, 0, 255]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 70, "maxdiff": 255, "planes": "U", "first": ["U", 12, 24, 0, 255]}
+    [2] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 255, 0]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1792, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [2] pixels planes=UY
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2749, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 120, 29, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 5, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 255, 0]}
+    [1] pixels planes=UVY
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 255, 0]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 268, "maxdiff": 255, "planes": "VY", "first": ["Y", 25, 44, 0, 255]}
+
+== pair A=lean_libwebp B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      73
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=dwebp B=dwebp_noasm ==
+  both_ok_same       50
+  both_ok_nocmp      0
+  both_ok_diff       23
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [13] pixels planes=Y
+       corpus/crafted/bigcoef_29.vp8 {"kind": "pixels", "ndiff": 108, "maxdiff": 255, "planes": "Y", "first": ["Y", 25, 20, 0, 255]}
+       corpus/crafted/bigcoef_33.vp8 {"kind": "pixels", "ndiff": 208, "maxdiff": 255, "planes": "Y", "first": ["Y", 8, 4, 0, 255]}
+       corpus/crafted/bigcoef_11.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 17, 255, 0]}
+       corpus/crafted/bigcoef_26.vp8 {"kind": "pixels", "ndiff": 189, "maxdiff": 255, "planes": "Y", "first": ["Y", 124, 16, 234, 202]}
+       corpus/crafted/bigcoef_18.vp8 {"kind": "pixels", "ndiff": 799, "maxdiff": 255, "planes": "Y", "first": ["Y", 115, 32, 0, 255]}
+       corpus/crafted/bigcoef_20.vp8 {"kind": "pixels", "ndiff": 978, "maxdiff": 255, "planes": "Y", "first": ["Y", 100, 16, 0, 255]}
+       corpus/crafted/bigcoef_22.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 80, 36, 0, 255]}
+       corpus/crafted/bigcoef_08.vp8 {"kind": "pixels", "ndiff": 10, "maxdiff": 255, "planes": "Y", "first": ["Y", 13, 76, 0, 255]}
+       corpus/crafted/bigcoef_10.vp8 {"kind": "pixels", "ndiff": 183, "maxdiff": 255, "planes": "Y", "first": ["Y", 120, 8, 46, 14]}
+       corpus/crafted/bigcoef_32.vp8 {"kind": "pixels", "ndiff": 101, "maxdiff": 255, "planes": "Y", "first": ["Y", 22, 1, 0, 255]}
+       corpus/crafted/bigcoef_30.vp8 {"kind": "pixels", "ndiff": 210, "maxdiff": 255, "planes": "Y", "first": ["Y", 92, 32, 0, 255]}
+       corpus/crafted/bigcoef_02.vp8 {"kind": "pixels", "ndiff": 620, "maxdiff": 255, "planes": "Y", "first": ["Y", 117, 12, 0, 255]}
+       corpus/crafted/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [3] pixels planes=U
+       corpus/crafted/bigcoef_25.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 0, 7, 255, 0]}
+       corpus/crafted/bigcoef_03.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "U", "first": ["U", 29, 16, 0, 255]}
+       corpus/crafted/bigcoef_13.vp8 {"kind": "pixels", "ndiff": 70, "maxdiff": 255, "planes": "U", "first": ["U", 12, 24, 0, 255]}
+    [2] pixels planes=UV
+       corpus/crafted/bigcoef_06.vp8 {"kind": "pixels", "ndiff": 477, "maxdiff": 255, "planes": "UV", "first": ["U", 47, 24, 255, 0]}
+       corpus/crafted/bigcoef_14.vp8 {"kind": "pixels", "ndiff": 1792, "maxdiff": 255, "planes": "UV", "first": ["U", 16, 20, 255, 0]}
+    [2] pixels planes=UY
+       corpus/crafted/bigcoef_12.vp8 {"kind": "pixels", "ndiff": 2749, "maxdiff": 255, "planes": "UY", "first": ["Y", 84, 68, 255, 0]}
+       corpus/crafted/bigcoef_16.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "UY", "first": ["Y", 120, 29, 0, 255]}
+    [1] pixels planes=V
+       corpus/crafted/bigcoef_27.vp8 {"kind": "pixels", "ndiff": 5, "maxdiff": 255, "planes": "V", "first": ["V", 28, 8, 255, 0]}
+    [1] pixels planes=UVY
+       corpus/crafted/bigcoef_38.vp8 {"kind": "pixels", "ndiff": 1780, "maxdiff": 255, "planes": "UVY", "first": ["Y", 28, 72, 255, 0]}
+    [1] pixels planes=VY
+       corpus/crafted/bigcoef_39.vp8 {"kind": "pixels", "ndiff": 268, "maxdiff": 255, "planes": "VY", "first": ["Y", 25, 44, 0, 255]}
+
+== pair A=dwebp B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      73
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=dwebp_noasm B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      73
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== sanitizer reports (decoder, location: message) -> #files, smallest examples ==
+  [dixie_asan] 73  UBSan predict.c:1382:36: signed integer overflow: N * N cannot be represented in type 'int'
+       e.g. gen/predict.c:1382:36: runtime error: signed integer overflow: 16843009 * 129 cannot be represented in type 'int'
+       corpus/crafted/trailing_garbage_in_part.vp8
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/parts8_one_row.vp8
+  [dixie_asan] 68  UBSan tokens.c:283:19: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/tokens.c:283:19: runtime error: left shift of 1 by 31 places cannot be represented in type 'int'
+       corpus/crafted/trailing_garbage_in_part.vp8
+       corpus/crafted/parts8_one_row_last_empty.vp8
+       corpus/crafted/parts8_one_row.vp8

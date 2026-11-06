@@ -1,0 +1,1 @@
+libwebp is not self-consistent on corrupt input: dwebp (SSE2 TransformOne/WHT, 16-bit lanes) != dwebp -noasm (C, int intermediates) whenever IDCT intermediates exceed int16; here dixie == dwebp -noasm and the Lean 'libwebp' model == dwebp (SSE2). 11 of the 20 dixie-vs-dwebp pixel diffs in the corrupt corpus and 6 of the 16 fuzz pixel repros are this case only.

@@ -1,0 +1,28 @@
+# Build outputs
+webp-lean/.lake/
+build/libwebp-tools/
+build/libwebp-fuzz/
+build/*.log
+fuzz/target/
+fuzz/fuzz/target/
+fuzz/fuzz/corpus/
+fuzz/fuzz/artifacts/
+__pycache__/
+
+# Fuzzing campaign output (regenerate with fuzz/scripts/gen-corpus.sh and run-fuzz.sh;
+# cited example inputs are kept in fuzz/repro/)
+fuzz/corpus/
+fuzz/corpus-gen/out/
+fuzz/findings*/
+fuzz/artifacts/
+fuzz/logs/
+
+# RFC 6386 reference-decoder validation: binaries, generated corpora, bulky per-file reports
+build/dixie/dixie_dec
+build/dixie/dixie_dec_asan
+build/dixie/dixie_dec_iconv
+build/dixie/tools/vp8enc
+build/dixie/tools/vp8err
+build/dixie/corpus/
+build/dixie/reports/*.json
+build/dixie/reports/*.json.gz

@@ -1,0 +1,1 @@
+dixie OK / libwebp NOT_ENOUGH_DATA 'cannot parse partitions' (3 corrupt files + crafted): libwebp ParsePartitions requires part_start < buf_end, i.e. the LAST token partition must be non-empty (dixie: last partition = remaining bytes, may be 0, read as zeros).

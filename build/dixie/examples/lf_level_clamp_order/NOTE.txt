@@ -1,0 +1,1 @@
+Pixel diff (2 corrupt + 4 crafted): dixie_loopfilter.c calculate_filter_parameters clamps the segment-adjusted level to 0..63 BEFORE adding ref_delta/mode_delta and clamps again after (libvpx does the same); libwebp PrecomputeFilterStrengths adds the deltas to the unclamped segment level and clamps once. e.g. abs segment lf=-62, ref_delta[0]=+40: dixie 40, libwebp 0.

@@ -1,0 +1,1 @@
+crafted: all MBs skipped (no token read at all), token partitions 0..n-2 empty, last = 1 byte. dixie OK; libwebp NOT_ENOUGH_DATA 'Premature end-of-file': VP8InitBitReader on a 0-byte partition immediately calls VP8LoadFinalBytes, which sets eof=1, and VP8DecodeMB returns !token_br->eof even for skipped MBs.

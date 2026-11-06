@@ -1,0 +1,102 @@
+files: 564  decoders: dixie,lean_spec,lean_impl,lean_libwebp,dwebp  time: 28.7s
+
+== per-decoder status ==
+  dixie          ok=564
+  lean_spec      ok=564
+  lean_impl      ok=564
+  lean_libwebp   ok=564
+  dwebp          ok=564
+
+== per-decoder rejection reasons ==
+
+== pair A=dixie B=lean_spec ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_impl ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_libwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=dixie B=dwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_spec B=lean_impl ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_spec B=lean_libwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_spec B=dwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_impl B=lean_libwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_impl B=dwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=lean_libwebp B=dwebp ==
+  both_ok_same       564
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== sanitizer reports (decoder, location: message) -> #files, smallest examples ==

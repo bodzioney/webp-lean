@@ -1,0 +1,44 @@
+files: 564  decoders: dixie,dixie_asan,dwebp  time: 8.2s
+
+== per-decoder status ==
+  dixie          ok=564
+  dixie_asan     ok=564
+  dwebp          ok=564
+
+== per-decoder rejection reasons ==
+
+== pair A=dixie B=dixie_asan ==
+  both_ok_same       564
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=dixie B=dwebp ==
+  both_ok_same       564
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== pair A=dixie_asan B=dwebp ==
+  both_ok_same       564
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        0
+  crash_or_timeout   0
+
+== sanitizer reports (decoder, location: message) -> #files, smallest examples ==
+  [dixie_asan] 563  UBSan tokens.c:283:19: left shift of N by N places cannot be represented in type 'int'
+       corpus/valid/cwebp/c038_syn_text_1x1.webp
+       corpus/valid/cwebp/c190_syn_text_1x1.webp
+       corpus/valid/cwebp/c191_syn_checker_33x47.webp
+  [dixie_asan] 357  UBSan predict.c:1382:36: signed integer overflow: N * N cannot be represented in type 'int'
+       corpus/valid/cwebp/c258_real_image-webp_tests_reference_regression_color_index.webp
+       corpus/valid/cwebp/c219_syn_text_15x15.webp
+       corpus/valid/cwebp/c123_real_image-webp_tests_reference_gallery1_2.webp
+  [dixie_asan] 1  UBSan dixie.c:511:44: left shift of N by N places cannot be represented in type 'int'
+       corpus/valid/ext/corpus-src__libwebp-test-data__vp80-03-segmentation-1425.webp

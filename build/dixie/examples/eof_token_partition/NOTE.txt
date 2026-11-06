@@ -1,0 +1,3 @@
+dixie OK / libwebp NOT_ENOUGH_DATA 'Premature end-of-file encountered.' (1305 corrupt files).
+Cause: dixie's bool decoder (bool_decoder.h bool_get) shifts in zero bytes once input_len==0; libwebp's VP8LoadFinalBytes sets br->eof when a bit is decoded whose 8-bit window extends past the partition end (it appends one zero byte and flags eof), and VP8DecodeMB returns !token_br->eof after every macroblock -> frame rejected.
+not_enough_data.webp = fuzz repro fuzz/repro/lean-vp8-eof/not_enough_data.webp (same behaviour).

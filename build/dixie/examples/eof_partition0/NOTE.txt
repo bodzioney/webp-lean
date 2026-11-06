@@ -1,0 +1,3 @@
+dixie OK / libwebp NOT_ENOUGH_DATA 'Premature end-of-partition0 encountered.' (1464 files; incl. all width/height enlargements: more MBs than mode data) and BITSTREAM_ERROR 'cannot parse segment header' (108) / 'cannot parse filter header' (17).
+Cause: same zero-fill vs eof as eof_token_partition, for the first partition: libwebp checks br->eof after the segment header, after the filter header, and after every row of intra modes (VP8ParseIntraModeRow). p0size_0 = first partition size 0 (dixie decodes everything from zeros).
+bitstream_error.webp = fuzz repro fuzz/repro/lean-vp8-eof/bitstream_error.webp (libwebp: 'cannot parse segment header').

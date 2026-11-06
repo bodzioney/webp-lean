@@ -1,0 +1,17 @@
+name = "webp"
+version = "0.1.0"
+defaultTargets = ["WebP", "webp-lean"]
+
+[leanOptions]
+autoImplicit = false
+
+[[lean_lib]]
+name = "WebP"
+
+[[lean_exe]]
+name = "webp-lean"
+root = "Main"
+
+[[lean_exe]]
+name = "vp8-check"
+root = "VP8Check"

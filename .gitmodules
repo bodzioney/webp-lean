@@ -1,0 +1,9 @@
+[submodule "libwebp"]
+	path = libwebp
+	url = https://chromium.googlesource.com/webm/libwebp
+[submodule "image-webp"]
+	path = image-webp
+	url = https://github.com/image-rs/image-webp.git
+[submodule "corpus-src/libwebp-test-data"]
+	path = corpus-src/libwebp-test-data
+	url = https://chromium.googlesource.com/webm/libwebp-test-data

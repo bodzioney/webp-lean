@@ -1,0 +1,981 @@
+files: 10241  decoders: dixie,dixie_asan,dwebp,dixie_nosetjmp  time: 148.1s
+
+== per-decoder status ==
+  dixie          ok=7944  reject=2297
+  dixie_asan     ok=7944  reject=2297
+  dwebp          ok=4862  reject=5379
+  dixie_nosetjmp crash=1941  ok=7944  reject=356
+
+== per-decoder rejection reasons ==
+  dixie:
+      1251  7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header
+       453  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 0
+       252  5:VPX_CODEC_UNSUP_BITSTREAM Failed to parse frame header
+        68  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+        50  driver frame not shown
+        45  driver not a key frame
+        45  7:VPX_CODEC_CORRUPT_FRAME Truncated packet found parsing partition lengths.
+        42  5:VPX_CODEC_UNSUP_BITSTREAM Experimental bitstreams not supported.
+        37  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 1
+        25  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 2
+        18  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 3
+         5  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 6
+         4  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 4
+         2  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 5
+  dixie_asan:
+      1251  7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header
+       453  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 0
+       252  5:VPX_CODEC_UNSUP_BITSTREAM Failed to parse frame header
+        68  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+        50  driver frame not shown
+        45  driver not a key frame
+        45  7:VPX_CODEC_CORRUPT_FRAME Truncated packet found parsing partition lengths.
+        42  5:VPX_CODEC_UNSUP_BITSTREAM Experimental bitstreams not supported.
+        37  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 1
+        25  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 2
+        18  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 3
+         5  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 6
+         4  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 4
+         2  7:VPX_CODEC_CORRUPT_FRAME Truncated partition 5
+  dwebp:
+      3735  7(NOT_ENOUGH_DATA)
+      1644  3(BITSTREAM_ERROR)
+  dixie_nosetjmp:
+       139  7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header
+        57  5:VPX_CODEC_UNSUP_BITSTREAM Failed to parse frame header
+        50  driver frame not shown
+        45  driver not a key frame
+        42  5:VPX_CODEC_UNSUP_BITSTREAM Experimental bitstreams not supported.
+        23  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+
+== pair A=dixie B=dixie_asan ==
+  both_ok_same       7944
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        2297
+  crash_or_timeout   0
+
+== pair A=dixie B=dwebp ==
+  both_ok_same       4823
+  both_ok_diff       20
+  A_ok_B_reject      3101
+  A_reject_B_ok      19
+  both_reject        2278
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [7] pixels planes=Y  <hdr>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       corpus/corrupt/enc_e027_partitions0_syn_noise_16x16__hdr_b19_bit4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 5, 0, 255]}
+       corpus/corrupt/enc_e018_partitions3_syn_text_33x47__hdr_b20_ff.vp8 {"kind": "pixels", "ndiff": 9, "maxdiff": 255, "planes": "Y", "first": ["Y", 26, 23, 245, 255]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b16_bit5.vp8 {"kind": "pixels", "ndiff": 580, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b21_bit3.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 37, 53, 255, 0]}
+    [4] pixels planes=Y  <ptab>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b2_flip4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 25, 0, 255]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b15_flip0.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 255, 0]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b17_flip2.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 255, 0]}
+    [2] pixels planes=UVY  <hdr>
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_filter_1_method_0__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 21248, "maxdiff": 134, "planes": "UVY", "first": ["Y", 0, 0, 150, 129]}
+    [1] pixels planes=U  <hdr>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b28_bit3.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 21, 30, 255, 0]}
+    [1] pixels planes=V  <p0size>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__p0size_223.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 21, 25, 0, 255]}
+    [1] pixels planes=V  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b1_bit1.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 45, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UY  <hdr>
+       corpus/corrupt/enc_e096_partitions1_syn_noise_3x255__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 437, "maxdiff": 55, "planes": "UY", "first": ["Y", 0, 0, 125, 128]}
+    [1] pixels planes=Y  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_256136.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 9, "planes": "Y", "first": ["Y", 0, 0, 118, 127]}
+  -- A_ok_B_reject (examples) --
+    [999] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b12_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_00.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b14_00.vp8
+    [799] B: 7(NOT_ENOUGH_DATA)  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit6.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit7.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit3.vp8
+    [284] B: 7(NOT_ENOUGH_DATA)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b2_flip5.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b3_flip6.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b10_flip7.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b11_flip0.vp8
+    [211] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_20.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_20.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_21.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_21.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_22.vp8
+    [196] B: 3(BITSTREAM_ERROR)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k2_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b0_flip3.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k2_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__ptab_k1_ff.vp8
+    [161] B: 7(NOT_ENOUGH_DATA)  <tok>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tok_b20_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b20_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_ff.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tok_b30_bit.vp8
+    [111] B: 3(BITSTREAM_ERROR)  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_2.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_1.vp8
+    [107] B: 7(NOT_ENOUGH_DATA)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit7.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b0_bit6.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tag_b0_bit6.vp8
+    [45] B: 7(NOT_ENOUGH_DATA)  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_592161.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_259962.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_464270.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_843616.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rbyte_105980.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_338075.vp8
+    [42] B: 7(NOT_ENOUGH_DATA)  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_580733.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_789697.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_113788.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_265856.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_917009.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_314322.vp8
+    [39] B: 7(NOT_ENOUGH_DATA)  <rflip4>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_766148.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_830818.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_474816.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_318411.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_830222.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip4_26452.vp8
+    [29] B: 7(NOT_ENOUGH_DATA)  <rflip1>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip1_122683.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip1_135366.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_439258.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__rflip1_997176.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_29799.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__rflip1_726383.vp8
+    [27] B: 7(NOT_ENOUGH_DATA)  <rflip8>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip8_689995.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip8_809754.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_291990.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_718264.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__rflip8_150475.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip8_177292.vp8
+    [21] B: 7(NOT_ENOUGH_DATA)  <rflip16>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_208701.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_478748.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip16_667559.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip16_871961.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rflip16_175137.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip16_191551.vp8
+    [15] B: 3(BITSTREAM_ERROR)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tag_b1_bit1.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__tag_b1_bit1.vp8
+    [6] B: 7(NOT_ENOUGH_DATA)  <p0size>
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__p0size_24.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__p0size_38.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__p0size_34.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__p0size_96.vp8
+       corpus/corrupt/enc_e137_partitions3_syn_gradient_128x128__p0size_100.vp8
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__p0size_384.vp8
+    [4] B: 3(BITSTREAM_ERROR)  <rbyte>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_634864.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rbyte_158861.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rbyte_551111.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__rbyte_43086.vp8
+    [4] B: 3(BITSTREAM_ERROR)  <tok>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__tok_b37_ff.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tok_b30_ff.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b64_ff.vp8
+       corpus/corrupt/enc_e039_partitions2_syn_solid_129x67__tok_b94_ff.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <rflip4>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_52187.vp8
+  -- A_reject_B_ok (examples) --
+    [15] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_bit6.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__hdr_b10_bit7.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__hdr_b10_bit6.vp8
+    [2] A: 7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_19.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rflip1>
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip1_65124.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_880718.vp8
+
+== pair A=dixie B=dixie_nosetjmp ==
+  both_ok_same       7944
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        356
+  crash_or_timeout   1941
+  -- crash_or_timeout (examples) --
+    [549] A=reject B=crash  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit3.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit6.vp8
+    [512] A=reject B=crash  <trunc>
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__trunc_0.vp8
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__trunc_0.vp8
+       corpus/corrupt/cwebp_c155_syn_noise_16x16__trunc_0.vp8
+    [218] A=reject B=crash  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b10_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b11_bit0.vp8
+    [206] A=reject B=crash  <ptab>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b0_flip7.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b1_flip0.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b2_flip1.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b3_flip2.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b4_flip3.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b5_flip4.vp8
+    [165] A=reject B=crash  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_14.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_15.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_24.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_524287.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_14.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_15.vp8
+    [87] A=reject B=crash  <start>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b3_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b4_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b5_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b3_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b4_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b5_flip.vp8
+    [49] A=reject B=crash  <rflip16>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_560826.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_579301.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_386776.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_739226.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_929780.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip16_158172.vp8
+    [36] A=reject B=crash  <rflip8>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_135779.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_226975.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_513127.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_560940.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_564567.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip8_123288.vp8
+    [32] A=reject B=crash  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b8_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b6_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b8_bit0.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b6_bit4.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b8_bit4.vp8
+    [26] A=reject B=crash  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_10109.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_216712.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_23052.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_892007.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_751409.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_905377.vp8
+    [23] A=reject B=crash  <rflip4>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_24871.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_370892.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_600833.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_136250.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_181100.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_992521.vp8
+    [21] A=reject B=crash  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_755759.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_827771.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_260171.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_909128.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_661135.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip2_799743.vp8
+    [11] A=reject B=crash  <tok>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_bit.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b35_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b38_bit.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b61_bit.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__tok_b38_bit.vp8
+    [6] A=reject B=crash  <rflip1>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip1_970134.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip1_318124.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip1_471499.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_719161.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_227195.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rflip1_603270.vp8
+
+== pair A=dixie_asan B=dwebp ==
+  both_ok_same       4823
+  both_ok_diff       20
+  A_ok_B_reject      3101
+  A_reject_B_ok      19
+  both_reject        2278
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [7] pixels planes=Y  <hdr>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       corpus/corrupt/enc_e027_partitions0_syn_noise_16x16__hdr_b19_bit4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 5, 0, 255]}
+       corpus/corrupt/enc_e018_partitions3_syn_text_33x47__hdr_b20_ff.vp8 {"kind": "pixels", "ndiff": 9, "maxdiff": 255, "planes": "Y", "first": ["Y", 26, 23, 245, 255]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b16_bit5.vp8 {"kind": "pixels", "ndiff": 580, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b21_bit3.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 37, 53, 255, 0]}
+    [4] pixels planes=Y  <ptab>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b2_flip4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 25, 0, 255]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b15_flip0.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 255, 0]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b17_flip2.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 255, 0]}
+    [2] pixels planes=UVY  <hdr>
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_filter_1_method_0__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 21248, "maxdiff": 134, "planes": "UVY", "first": ["Y", 0, 0, 150, 129]}
+    [1] pixels planes=U  <hdr>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b28_bit3.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 21, 30, 255, 0]}
+    [1] pixels planes=V  <p0size>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__p0size_223.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 21, 25, 0, 255]}
+    [1] pixels planes=V  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b1_bit1.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 45, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UY  <hdr>
+       corpus/corrupt/enc_e096_partitions1_syn_noise_3x255__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 437, "maxdiff": 55, "planes": "UY", "first": ["Y", 0, 0, 125, 128]}
+    [1] pixels planes=Y  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_256136.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 9, "planes": "Y", "first": ["Y", 0, 0, 118, 127]}
+  -- A_ok_B_reject (examples) --
+    [999] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b12_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_00.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b14_00.vp8
+    [799] B: 7(NOT_ENOUGH_DATA)  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit6.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit7.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit3.vp8
+    [284] B: 7(NOT_ENOUGH_DATA)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b2_flip5.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b3_flip6.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b10_flip7.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b11_flip0.vp8
+    [211] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_20.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_20.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_21.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_21.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_22.vp8
+    [196] B: 3(BITSTREAM_ERROR)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k2_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b0_flip3.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k2_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__ptab_k1_ff.vp8
+    [161] B: 7(NOT_ENOUGH_DATA)  <tok>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tok_b20_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b20_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_ff.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tok_b30_bit.vp8
+    [111] B: 3(BITSTREAM_ERROR)  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_2.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_1.vp8
+    [107] B: 7(NOT_ENOUGH_DATA)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit7.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b0_bit6.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tag_b0_bit6.vp8
+    [45] B: 7(NOT_ENOUGH_DATA)  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_592161.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_259962.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_464270.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_843616.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rbyte_105980.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_338075.vp8
+    [42] B: 7(NOT_ENOUGH_DATA)  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_580733.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_789697.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_113788.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_265856.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_917009.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_314322.vp8
+    [39] B: 7(NOT_ENOUGH_DATA)  <rflip4>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_766148.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_830818.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_474816.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_318411.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_830222.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip4_26452.vp8
+    [29] B: 7(NOT_ENOUGH_DATA)  <rflip1>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip1_122683.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip1_135366.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_439258.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__rflip1_997176.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_29799.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__rflip1_726383.vp8
+    [27] B: 7(NOT_ENOUGH_DATA)  <rflip8>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip8_689995.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip8_809754.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_291990.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_718264.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__rflip8_150475.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip8_177292.vp8
+    [21] B: 7(NOT_ENOUGH_DATA)  <rflip16>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_208701.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_478748.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip16_667559.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip16_871961.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rflip16_175137.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip16_191551.vp8
+    [15] B: 3(BITSTREAM_ERROR)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tag_b1_bit1.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__tag_b1_bit1.vp8
+    [6] B: 7(NOT_ENOUGH_DATA)  <p0size>
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__p0size_24.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__p0size_38.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__p0size_34.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__p0size_96.vp8
+       corpus/corrupt/enc_e137_partitions3_syn_gradient_128x128__p0size_100.vp8
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__p0size_384.vp8
+    [4] B: 3(BITSTREAM_ERROR)  <rbyte>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_634864.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rbyte_158861.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rbyte_551111.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__rbyte_43086.vp8
+    [4] B: 3(BITSTREAM_ERROR)  <tok>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__tok_b37_ff.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tok_b30_ff.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b64_ff.vp8
+       corpus/corrupt/enc_e039_partitions2_syn_solid_129x67__tok_b94_ff.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <rflip4>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_52187.vp8
+  -- A_reject_B_ok (examples) --
+    [15] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_bit6.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__hdr_b10_bit7.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__hdr_b10_bit6.vp8
+    [2] A: 7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_19.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rflip1>
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip1_65124.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_880718.vp8
+
+== pair A=dixie_asan B=dixie_nosetjmp ==
+  both_ok_same       7944
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        356
+  crash_or_timeout   1941
+  -- crash_or_timeout (examples) --
+    [549] A=reject B=crash  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit3.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit6.vp8
+    [512] A=reject B=crash  <trunc>
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__trunc_0.vp8
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__trunc_0.vp8
+       corpus/corrupt/cwebp_c155_syn_noise_16x16__trunc_0.vp8
+    [218] A=reject B=crash  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b10_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b11_bit0.vp8
+    [206] A=reject B=crash  <ptab>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b0_flip7.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b1_flip0.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b2_flip1.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b3_flip2.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b4_flip3.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b5_flip4.vp8
+    [165] A=reject B=crash  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_14.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_15.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_24.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_524287.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_14.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_15.vp8
+    [87] A=reject B=crash  <start>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b3_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b4_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b5_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b3_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b4_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b5_flip.vp8
+    [49] A=reject B=crash  <rflip16>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_560826.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_579301.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_386776.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_739226.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_929780.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip16_158172.vp8
+    [36] A=reject B=crash  <rflip8>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_135779.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_226975.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_513127.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_560940.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_564567.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip8_123288.vp8
+    [32] A=reject B=crash  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b8_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b6_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b8_bit0.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b6_bit4.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b8_bit4.vp8
+    [26] A=reject B=crash  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_10109.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_216712.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_23052.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_892007.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_751409.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_905377.vp8
+    [23] A=reject B=crash  <rflip4>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_24871.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_370892.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_600833.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_136250.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_181100.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_992521.vp8
+    [21] A=reject B=crash  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_755759.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_827771.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_260171.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_909128.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_661135.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip2_799743.vp8
+    [11] A=reject B=crash  <tok>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_bit.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b35_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b38_bit.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b61_bit.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__tok_b38_bit.vp8
+    [6] A=reject B=crash  <rflip1>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip1_970134.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip1_318124.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip1_471499.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_719161.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_227195.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rflip1_603270.vp8
+
+== pair A=dwebp B=dixie_nosetjmp ==
+  both_ok_same       4823
+  both_ok_diff       20
+  A_ok_B_reject      17
+  A_reject_B_ok      3101
+  both_reject        339
+  crash_or_timeout   1941
+  -- both_ok_diff (examples) --
+    [7] pixels planes=Y  <hdr>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 147, 255]}
+       corpus/corrupt/enc_e027_partitions0_syn_noise_16x16__hdr_b19_bit4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 5, 255, 0]}
+       corpus/corrupt/enc_e018_partitions3_syn_text_33x47__hdr_b20_ff.vp8 {"kind": "pixels", "ndiff": 9, "maxdiff": 255, "planes": "Y", "first": ["Y", 26, 23, 255, 245]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 142, 136]}
+       corpus/corrupt/enc_e114_partitions0_syn_text_64x64__hdr_b16_bit5.vp8 {"kind": "pixels", "ndiff": 580, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 142, 136]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b21_bit3.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 37, 53, 0, 255]}
+    [4] pixels planes=Y  <ptab>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 255, 0]}
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__ptab_b2_flip4.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 25, 255, 0]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b15_flip0.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 0, 255]}
+       corpus/corrupt/enc_e112_partitions2_syn_noise_64x64__ptab_b17_flip2.vp8 {"kind": "pixels", "ndiff": 3, "maxdiff": 255, "planes": "Y", "first": ["Y", 58, 5, 0, 255]}
+    [2] pixels planes=UVY  <hdr>
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 131, 164]}
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_filter_1_method_0__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 21248, "maxdiff": 134, "planes": "UVY", "first": ["Y", 0, 0, 129, 150]}
+    [1] pixels planes=U  <hdr>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__hdr_b28_bit3.vp8 {"kind": "pixels", "ndiff": 2, "maxdiff": 255, "planes": "U", "first": ["U", 21, 30, 0, 255]}
+    [1] pixels planes=V  <p0size>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__p0size_223.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 21, 25, 255, 0]}
+    [1] pixels planes=V  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 255, 0]}
+    [1] pixels planes=Y  <tag>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tag_b1_bit1.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 9, 45, 255, 0]}
+    [1] pixels planes=Y  <tok>
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 255, 0]}
+    [1] pixels planes=UY  <hdr>
+       corpus/corrupt/enc_e096_partitions1_syn_noise_3x255__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 437, "maxdiff": 55, "planes": "UY", "first": ["Y", 0, 0, 128, 125]}
+    [1] pixels planes=Y  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_256136.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 9, "planes": "Y", "first": ["Y", 0, 0, 127, 118]}
+  -- A_ok_B_reject (examples) --
+    [15] B: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_bit6.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__hdr_b10_bit6.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__hdr_b10_bit7.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__hdr_b10_bit6.vp8
+    [1] B: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rflip1>
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip1_65124.vp8
+    [1] B: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <rbyte>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__rbyte_880718.vp8
+  -- A_reject_B_ok (examples) --
+    [999] A: 7(NOT_ENOUGH_DATA)  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b12_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_00.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b13_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b14_00.vp8
+    [799] A: 7(NOT_ENOUGH_DATA)  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit6.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit7.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b7_bit3.vp8
+    [284] A: 7(NOT_ENOUGH_DATA)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_b2_flip5.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b1_flip4.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b3_flip6.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b10_flip7.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__ptab_b11_flip0.vp8
+    [211] A: 7(NOT_ENOUGH_DATA)  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_20.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_20.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_21.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_21.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_22.vp8
+    [196] A: 3(BITSTREAM_ERROR)  <ptab>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__ptab_k2_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_b0_flip3.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k1_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__ptab_k2_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__ptab_k1_ff.vp8
+    [161] A: 7(NOT_ENOUGH_DATA)  <tok>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tok_b20_ff.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b20_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_bit.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tok_b21_ff.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tok_b30_bit.vp8
+    [111] A: 3(BITSTREAM_ERROR)  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_2.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__p0size_1.vp8
+    [107] A: 7(NOT_ENOUGH_DATA)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit6.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b0_bit7.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b0_bit6.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__tag_b0_bit6.vp8
+    [45] A: 7(NOT_ENOUGH_DATA)  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_592161.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_259962.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_464270.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rbyte_843616.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rbyte_105980.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_338075.vp8
+    [42] A: 7(NOT_ENOUGH_DATA)  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_580733.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_789697.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_113788.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_265856.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_917009.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_314322.vp8
+    [39] A: 7(NOT_ENOUGH_DATA)  <rflip4>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_766148.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_830818.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_474816.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_318411.vp8
+       corpus/corrupt/enc_e079_partitions3_syn_solid_17x17__rflip4_830222.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip4_26452.vp8
+    [29] A: 7(NOT_ENOUGH_DATA)  <rflip1>
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip1_122683.vp8
+       corpus/corrupt/cwebp_c292_syn_checker_1x1__rflip1_135366.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_439258.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__rflip1_997176.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_29799.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__rflip1_726383.vp8
+    [27] A: 7(NOT_ENOUGH_DATA)  <rflip8>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip8_689995.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip8_809754.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_291990.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip8_718264.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__rflip8_150475.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip8_177292.vp8
+    [21] A: 7(NOT_ENOUGH_DATA)  <rflip16>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_208701.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip16_478748.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip16_667559.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip16_871961.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rflip16_175137.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__rflip16_191551.vp8
+    [15] A: 3(BITSTREAM_ERROR)  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit0.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__tag_b1_bit0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tag_b1_bit1.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__small_1x1__tag_b1_bit1.vp8
+    [6] A: 7(NOT_ENOUGH_DATA)  <p0size>
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__p0size_24.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__p0size_38.vp8
+       corpus/corrupt/enc_e074_partitions1_syn_photo_100x75__p0size_34.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__p0size_96.vp8
+       corpus/corrupt/enc_e137_partitions3_syn_gradient_128x128__p0size_100.vp8
+       corpus/corrupt/cwebp_c248_syn_gradient_128x128__p0size_384.vp8
+    [4] A: 3(BITSTREAM_ERROR)  <rbyte>
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rbyte_634864.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__rbyte_158861.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rbyte_551111.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__lossy_q0_f100__rbyte_43086.vp8
+    [4] A: 3(BITSTREAM_ERROR)  <tok>
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__tok_b37_ff.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__tok_b30_ff.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b64_ff.vp8
+       corpus/corrupt/enc_e039_partitions2_syn_solid_129x67__tok_b94_ff.vp8
+    [1] A: 3(BITSTREAM_ERROR)  <rflip4>
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip4_52187.vp8
+  -- crash_or_timeout (examples) --
+    [549] A=reject B=crash  <tag>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit3.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit4.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit5.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b1_bit6.vp8
+    [510] A=reject B=crash  <trunc>
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_0.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__trunc_0.vp8
+       corpus/corrupt/cwebp_c154_syn_noise_64x64__trunc_0.vp8
+       corpus/corrupt/cwebp_c155_syn_noise_16x16__trunc_0.vp8
+    [218] A=reject B=crash  <hdr>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b10_ff.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit1.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit2.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b10_ff.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__hdr_b11_bit0.vp8
+    [206] A=reject B=crash  <ptab>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b0_flip7.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b1_flip0.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b2_flip1.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b3_flip2.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b4_flip3.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__ptab_b5_flip4.vp8
+    [165] A=reject B=crash  <p0size>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_14.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_15.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_24.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_524287.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_14.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__p0size_15.vp8
+    [87] A=reject B=crash  <start>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b3_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b4_flip.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__start_b5_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b3_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b4_flip.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__start_b5_flip.vp8
+    [49] A=reject B=crash  <rflip16>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_560826.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip16_579301.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_386776.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_739226.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip16_929780.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip16_158172.vp8
+    [36] A=reject B=crash  <rflip8>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_135779.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_226975.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip8_513127.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_560940.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip8_564567.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip8_123288.vp8
+    [32] A=reject B=crash  <dim>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b8_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b6_bit0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b8_bit0.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b6_bit4.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__dim_b8_bit4.vp8
+    [26] A=reject B=crash  <rbyte>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_10109.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_216712.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_23052.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rbyte_892007.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_751409.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rbyte_905377.vp8
+    [23] A=reject B=crash  <rflip4>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_24871.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_370892.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip4_600833.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip4_136250.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_181100.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip4_992521.vp8
+    [21] A=reject B=crash  <rflip2>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip2_755759.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__rflip2_827771.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__rflip2_260171.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip2_909128.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip2_661135.vp8
+       corpus/corrupt/cwebp_c145_syn_solid_1x1__rflip2_799743.vp8
+    [11] A=reject B=crash  <tok>
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_bit.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b32_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b35_ff.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tok_b38_bit.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__tok_b61_bit.vp8
+       corpus/corrupt/enc_e107_partitions1_syn_gradient_17x17__tok_b38_bit.vp8
+    [6] A=reject B=crash  <rflip1>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rflip1_970134.vp8
+       corpus/corrupt/cwebp_c189_syn_solid_16x16__rflip1_318124.vp8
+       corpus/corrupt/enc_e047_partitions0_syn_solid_17x1__rflip1_471499.vp8
+       corpus/corrupt/enc_e065_partitions1_syn_solid_100x75__rflip1_719161.vp8
+       corpus/corrupt/enc_e158_partitions1_syn_solid_129x67__rflip1_227195.vp8
+       corpus/corrupt/enc_e071_partitions2_syn_photo_3x255__rflip1_603270.vp8
+    [2] A=ok B=crash  <trunc>
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_19.vp8
+
+== sanitizer reports (decoder, location: message) -> #files, smallest examples ==
+  [dixie_asan] 7643  UBSan tokens.c:283:19: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/tokens.c:283:19: runtime error: left shift of 1 by 31 places cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_21.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_22.vp8
+  [dixie_asan] 5866  UBSan predict.c:1382:36: signed integer overflow: N * N cannot be represented in type 'int'
+       e.g. gen/predict.c:1382:36: runtime error: signed integer overflow: 16843009 * 220 cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_20.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_20.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_21.vp8
+  [dixie_asan] 42  UBSan dixie.c:511:44: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/dixie.c:511:44: runtime error: left shift of 128 by 24 places cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b9_bit7.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__dim_b9_bit7.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b9_bit7.vp8
+  [dixie_nosetjmp] 7706  UBSan tokens.c:283:19: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/tokens.c:283:19: runtime error: left shift of 1 by 31 places cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_21.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_22.vp8
+  [dixie_nosetjmp] 5928  UBSan predict.c:1382:36: signed integer overflow: N * N cannot be represented in type 'int'
+       e.g. gen/predict.c:1382:36: runtime error: signed integer overflow: 16843009 * 220 cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_20.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_20.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_21.vp8
+  [dixie_nosetjmp] 853  ASan heap-buffer-overflow bool_decoder.h:32:21
+       e.g. SUMMARY: AddressSanitizer: heap-buffer-overflow /var/data/diff-fuzz/webp/build/dixie/gen/bool_decoder.h:32:21
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_0.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_0.vp8
+  [dixie_nosetjmp] 503  ASan SEGV bool_decoder.h:32:21
+       e.g. SUMMARY: AddressSanitizer: SEGV /var/data/diff-fuzz/webp/build/dixie/gen/bool_decoder.h:32:21
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__hdr_b11_bit2.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__p0size_524287.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__tag_b2_bit7.vp8
+  [dixie_nosetjmp] 226  ASan heap-buffer-overflow dixie.c:140:37
+       e.g. SUMMARY: AddressSanitizer: heap-buffer-overflow /var/data/diff-fuzz/webp/build/dixie/gen/dixie.c:140:37
+       corpus/corrupt/enc_e003_partitions3_real_corpus-src_libwebp-test-data_peak__trunc_15.vp8
+       corpus/corrupt/enc_e013_partitions1_syn_gradient_15x15__trunc_15.vp8
+       corpus/corrupt/enc_e082_partitions2_syn_photo_1x17__trunc_15.vp8
+  [dixie_nosetjmp] 103  ASan SEGV dixie_loopfilter.c:356:11
+       e.g. SUMMARY: AddressSanitizer: SEGV /var/data/diff-fuzz/webp/build/dixie/gen/dixie_loopfilter.c:356:11
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_20.vp8
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__trunc_21.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b8_bit0.vp8
+  [dixie_nosetjmp] 101  ASan SEGV dixie_loopfilter.c:458:11
+       e.g. SUMMARY: AddressSanitizer: SEGV /var/data/diff-fuzz/webp/build/dixie/gen/dixie_loopfilter.c:458:11
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__trunc_19.vp8
+       corpus/corrupt/enc_e075_partitions0_syn_text_15x15__trunc_22.vp8
+  [dixie_nosetjmp] 71  ASan heap-buffer-overflow bool_decoder.h:82:29
+       e.g. SUMMARY: AddressSanitizer: heap-buffer-overflow /var/data/diff-fuzz/webp/build/dixie/gen/bool_decoder.h:82:29
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_12.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_12.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_12.vp8
+  [dixie_nosetjmp] 42  UBSan dixie.c:511:44: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/dixie.c:511:44: runtime error: left shift of 128 by 24 places cannot be represented in type 'int'
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b9_bit7.vp8
+       corpus/corrupt/enc_e140_partitions0_syn_text_3x5__dim_b9_bit7.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b9_bit7.vp8
+  [dixie_nosetjmp] 41  ASan heap-buffer-overflow bool_decoder.h:34:22
+       e.g. SUMMARY: AddressSanitizer: heap-buffer-overflow /var/data/diff-fuzz/webp/build/dixie/gen/bool_decoder.h:34:22
+       corpus/corrupt/cwebp_c043_syn_text_31x33__trunc_11.vp8
+       corpus/corrupt/cwebp_c102_syn_gradient_31x33__trunc_11.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__trunc_11.vp8
+  [dixie_nosetjmp] 22  ASan SEGV dixie.c:140:37
+       e.g. SUMMARY: AddressSanitizer: SEGV /var/data/diff-fuzz/webp/build/dixie/gen/dixie.c:140:37
+       corpus/corrupt/ext_corpus-src__libwebp-test-data__alpha_no_compression__rflip16_47369.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__p0size_524287.vp8
+       corpus/corrupt/enc_e051_partitions2_syn_solid_1x17__tag_b2_bit7.vp8
+  [dixie_nosetjmp] 21  ASan heap-buffer-overflow predict.c:1330:58
+       e.g. SUMMARY: AddressSanitizer: heap-buffer-overflow /var/data/diff-fuzz/webp/build/dixie/gen/predict.c:1330:58
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__dim_b6_bit0.vp8
+       corpus/corrupt/enc_e055_partitions2_syn_gradient_1x1__rbyte_10109.vp8
+       corpus/corrupt/cwebp_c123_real_image-webp_tests_reference_gallery1_2__dim_b6_bit0.vp8

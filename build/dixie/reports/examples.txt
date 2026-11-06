@@ -1,0 +1,1072 @@
+files: 38  decoders: dixie,dixie_asan,lean_spec,lean_libwebp,dwebp,dwebp_noasm,dwebp_riff,libwebp_vp8  time: 1.0s
+
+== per-decoder status ==
+  dixie          ok=31  reject=7
+  dixie_asan     ok=31  reject=7
+  lean_spec      ok=31  reject=7
+  lean_libwebp   ok=22  reject=16
+  dwebp          ok=22  reject=16
+  dwebp_noasm    ok=22  reject=16
+  dwebp_riff     ok=25  reject=13
+  libwebp_vp8    ok=22  reject=16
+
+== per-decoder rejection reasons ==
+  dixie:
+         4  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+         3  7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header
+  dixie_asan:
+         4  5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+         3  7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header
+  lean_spec:
+         4  decode error: VP8: unsupported bitstream (reserved bits not supported)
+         2  decode error: VP8: corrupt frame (first partition does not fit)
+         1  decode error: VP8: corrupt frame (fewer than 10 bytes)
+  lean_libwebp:
+         5  decode error: VP8: premature end-of-file encountered
+         3  decode error: VP8: cannot parse partitions (not enough data)
+         2  decode error: VP8: cannot parse segment header
+         2  decode error: VP8: cannot parse partitions
+         1  decode error: VP8: premature end-of-partition0 encountered
+         1  decode error: VP8: cannot parse filter header
+         1  decode error: VP8: not enough data for frame header
+         1  decode error: VP8: inconsistent partition length
+  dwebp:
+        10  7(NOT_ENOUGH_DATA)
+         6  3(BITSTREAM_ERROR)
+  dwebp_noasm:
+        10  7(NOT_ENOUGH_DATA)
+         6  3(BITSTREAM_ERROR)
+  dwebp_riff:
+         7  7(NOT_ENOUGH_DATA)
+         6  3(BITSTREAM_ERROR)
+  libwebp_vp8:
+         5  7 Premature end-of-file encountered.
+         3  7 cannot parse partitions
+         2  3 cannot parse segment header
+         2  3 cannot parse partitions
+         1  7 Premature end-of-partition0 encountered.
+         1  3 cannot parse filter header
+         1  7 Truncated header.
+         1  7 bad partition length
+
+== pair A=dixie B=dixie_asan ==
+  both_ok_same       31
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_spec ==
+  both_ok_same       31
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=dixie B=lean_libwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: decode error: VP8: premature end-of-file encountered  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: decode error: VP8: cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: decode error: VP8: premature end-of-partition0 encountered  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: decode error: VP8: cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: decode error: VP8: cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: decode error: VP8: cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: decode error: VP8: cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie B=dwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie B=dwebp_noasm ==
+  both_ok_same       4
+  both_ok_nocmp      0
+  both_ok_diff       14
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 1465, "maxdiff": 255, "planes": "Y", "first": ["Y", 148, 60, 176, 144]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 255, 0]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 255, 0]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie B=dwebp_riff ==
+  both_ok_same       5
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      11
+  A_reject_B_ok      5
+  both_reject        2
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+    [1] A: 7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+
+== pair A=dixie B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      18
+  both_ok_diff       0
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7 Premature end-of-file encountered.  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: 7 cannot parse partitions  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: 7 cannot parse partitions
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: 3 cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: 7 Premature end-of-partition0 encountered.  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3 cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: 3 cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 3 cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: 3 cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie_asan B=lean_spec ==
+  both_ok_same       31
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        7
+  crash_or_timeout   0
+
+== pair A=dixie_asan B=lean_libwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: decode error: VP8: premature end-of-file encountered  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: decode error: VP8: cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: decode error: VP8: premature end-of-partition0 encountered  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: decode error: VP8: cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: decode error: VP8: cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: decode error: VP8: cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: decode error: VP8: cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie_asan B=dwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie_asan B=dwebp_noasm ==
+  both_ok_same       4
+  both_ok_nocmp      0
+  both_ok_diff       14
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 1465, "maxdiff": 255, "planes": "Y", "first": ["Y", 148, 60, 176, 144]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 255, 0]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 255, 0]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=dixie_asan B=dwebp_riff ==
+  both_ok_same       5
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      11
+  A_reject_B_ok      5
+  both_reject        2
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+    [1] A: 7:VPX_CODEC_CORRUPT_FRAME Failed to parse frame header  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+
+== pair A=dixie_asan B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      18
+  both_ok_diff       0
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7 Premature end-of-file encountered.  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: 7 cannot parse partitions  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: 7 cannot parse partitions
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: 3 cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: 7 Premature end-of-partition0 encountered.  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3 cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: 3 cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 3 cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: 3 cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: 5:VPX_CODEC_UNSUP_BITSTREAM Reserved bits not supported.  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=lean_spec B=lean_libwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: decode error: VP8: premature end-of-file encountered
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: decode error: VP8: premature end-of-file encountered  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: decode error: VP8: cannot parse partitions (not enough data)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: decode error: VP8: cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: decode error: VP8: premature end-of-partition0 encountered  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: decode error: VP8: cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: decode error: VP8: cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: decode error: VP8: cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: decode error: VP8: cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: decode error: VP8: unsupported bitstream (reserved bits not supported)  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=lean_spec B=dwebp ==
+  both_ok_same       3
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: decode error: VP8: unsupported bitstream (reserved bits not supported)  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=lean_spec B=dwebp_noasm ==
+  both_ok_same       4
+  both_ok_nocmp      0
+  both_ok_diff       14
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 1465, "maxdiff": 255, "planes": "Y", "first": ["Y", 148, 60, 176, 144]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 255, 0]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 8, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 255, 0]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [4] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [3] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: decode error: VP8: unsupported bitstream (reserved bits not supported)  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=lean_spec B=dwebp_riff ==
+  both_ok_same       5
+  both_ok_nocmp      0
+  both_ok_diff       15
+  A_ok_B_reject      11
+  A_reject_B_ok      5
+  both_reject        2
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [6] pixels planes=UVY
+       examples/seg_update_data0/seg_no_data_map1.vp8 {"kind": "pixels", "ndiff": 23906, "maxdiff": 131, "planes": "UVY", "first": ["Y", 0, 0, 231, 134]}
+       examples/dequant_qidx_minus1/dq_minus1_segmap.vp8 {"kind": "pixels", "ndiff": 16971, "maxdiff": 11, "planes": "UVY", "first": ["Y", 65, 0, 135, 136]}
+       examples/lf_level_clamp_order/lf_clamp_0.vp8 {"kind": "pixels", "ndiff": 9059, "maxdiff": 17, "planes": "UVY", "first": ["Y", 50, 6, 209, 207]}
+       examples/seg_update_data0/seg_no_data_map0.vp8 {"kind": "pixels", "ndiff": 6707, "maxdiff": 6, "planes": "UVY", "first": ["Y", 35, 0, 209, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs0_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+       examples/dequant_qidx_minus1/dq_minus1_abs1_q0.vp8 {"kind": "pixels", "ndiff": 24018, "maxdiff": 102, "planes": "UVY", "first": ["Y", 0, 0, 129, 207]}
+    [3] pixels planes=Y
+       examples/lf_level_clamp_order/lf_clamp_1.vp8 {"kind": "pixels", "ndiff": 81, "maxdiff": 23, "planes": "Y", "first": ["Y", 30, 13, 0, 8]}
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2616, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+    [2] pixels planes=Y  <hdr>
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8 {"kind": "pixels", "ndiff": 1, "maxdiff": 108, "planes": "Y", "first": ["Y", 0, 0, 255, 147]}
+       examples/lf_level_clamp_order/enc_e114_partitions0_syn_text_64x64__hdr_b15_bit5.vp8 {"kind": "pixels", "ndiff": 860, "maxdiff": 26, "planes": "Y", "first": ["Y", 54, 0, 136, 142]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 49, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 1, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+    [1] pixels planes=UVY  <hdr>
+       examples/seg_update_data0/cwebp_c248_syn_gradient_128x128__hdr_b10_bit3.vp8 {"kind": "pixels", "ndiff": 17256, "maxdiff": 97, "planes": "UVY", "first": ["Y", 0, 0, 164, 131]}
+  -- A_ok_B_reject (examples) --
+    [3] B: 7(NOT_ENOUGH_DATA)
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [2] B: 3(BITSTREAM_ERROR)
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+       examples/eof_partition0/bitstream_error.webp
+    [2] B: 3(BITSTREAM_ERROR)  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 7(NOT_ENOUGH_DATA)  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3(BITSTREAM_ERROR)  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: decode error: VP8: unsupported bitstream (reserved bits not supported)  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+    [1] A: decode error: VP8: corrupt frame (first partition does not fit)  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+
+== pair A=lean_spec B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      18
+  both_ok_diff       0
+  A_ok_B_reject      13
+  A_reject_B_ok      4
+  both_reject        3
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [3] B: 7 Premature end-of-file encountered.
+       examples/eof_token_partition/not_enough_data.webp
+       examples/empty_unused_partition_eof/allskip_parts2_empty.vp8
+       examples/empty_unused_partition_eof/allskip_parts8_empty.vp8
+    [2] B: 7 Premature end-of-file encountered.  <trunc>
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: 7 cannot parse partitions  <trunc>
+       examples/empty_last_partition/enc_e082_partitions2_syn_photo_1x17__trunc_98.vp8
+    [1] B: 7 cannot parse partitions
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: 3 cannot parse segment header
+       examples/eof_partition0/bitstream_error.webp
+    [1] B: 7 Premature end-of-partition0 encountered.  <hdr>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+    [1] B: 3 cannot parse segment header  <p0size>
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+    [1] B: 3 cannot parse filter header  <p0size>
+       examples/eof_partition0/cwebp_c154_syn_noise_64x64__p0size_2.vp8
+    [1] B: 3 cannot parse partitions  <ptab>
+       examples/partition_first_byte_ff/cwebp_c145_syn_solid_1x1__ptab_k1_ff.vp8
+    [1] B: 3 cannot parse partitions
+       examples/partition_first_byte_ff/parts8_one_row_unused_ff.vp8
+  -- A_reject_B_ok (examples) --
+    [3] A: decode error: VP8: unsupported bitstream (reserved bits not supported)
+       examples/reserved_bits/colorspace_3a16f46c.webp
+       examples/reserved_bits/reserved_cs0_clamp1.vp8
+       examples/reserved_bits/reserved_cs1_clamp0.vp8
+    [1] A: decode error: VP8: unsupported bitstream (reserved bits not supported)  <hdr>
+       examples/reserved_bits/cwebp_c145_syn_solid_1x1__hdr_b10_bit6.vp8
+
+== pair A=lean_libwebp B=dwebp ==
+  both_ok_same       22
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+
+== pair A=lean_libwebp B=dwebp_noasm ==
+  both_ok_same       16
+  both_ok_nocmp      0
+  both_ok_diff       6
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [3] pixels planes=Y
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2351, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 0, 255]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 255, 0]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 255, 0]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 255, 0]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 255, 0]}
+
+== pair A=lean_libwebp B=dwebp_riff ==
+  both_ok_same       22
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      3
+  both_reject        13
+  crash_or_timeout   0
+  -- A_reject_B_ok (examples) --
+    [1] A: decode error: VP8: cannot parse partitions (not enough data)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] A: decode error: VP8: premature end-of-file encountered  <trunc>
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] A: decode error: VP8: cannot parse partitions (not enough data)  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+
+== pair A=lean_libwebp B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      22
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+
+== pair A=dwebp B=dwebp_noasm ==
+  both_ok_same       16
+  both_ok_nocmp      0
+  both_ok_diff       6
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [3] pixels planes=Y
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2351, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 0, 255]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 255, 0]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 0, 255]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 255, 0]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 255, 0]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 255, 0]}
+
+== pair A=dwebp B=dwebp_riff ==
+  both_ok_same       22
+  both_ok_nocmp      0
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      3
+  both_reject        13
+  crash_or_timeout   0
+  -- A_reject_B_ok (examples) --
+    [2] A: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] A: 7(NOT_ENOUGH_DATA)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+
+== pair A=dwebp B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      22
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+
+== pair A=dwebp_noasm B=dwebp_riff ==
+  both_ok_same       16
+  both_ok_nocmp      0
+  both_ok_diff       6
+  A_ok_B_reject      0
+  A_reject_B_ok      3
+  both_reject        13
+  crash_or_timeout   0
+  -- both_ok_diff (examples) --
+    [3] pixels planes=Y
+       examples/idct_int16_intermediate/1b093984956b49a3f5d63aade6abc744a3ad5d37.webp {"kind": "pixels", "ndiff": 2351, "maxdiff": 255, "planes": "Y", "first": ["Y", 156, 51, 255, 0]}
+       examples/libwebp_simd_vs_c/094806df1bd80a7c760896b98c0107d23bc4fe39.webp {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 140, 113, 0, 255]}
+       examples/idct_int16_intermediate/bigcoef_04.vp8 {"kind": "pixels", "ndiff": 322, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 72, 255, 0]}
+    [1] pixels planes=Y  <ptab>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__ptab_b21_flip7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 48, 37, 0, 255]}
+    [1] pixels planes=V  <tag>
+       examples/idct_int16_intermediate/cwebp_c154_syn_noise_64x64__tag_b0_bit7.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "V", "first": ["V", 0, 13, 0, 255]}
+    [1] pixels planes=Y  <tok>
+       examples/libwebp_simd_vs_c/cwebp_c154_syn_noise_64x64__tok_b304_bit.vp8 {"kind": "pixels", "ndiff": 4, "maxdiff": 255, "planes": "Y", "first": ["Y", 45, 1, 0, 255]}
+  -- A_reject_B_ok (examples) --
+    [2] A: 7(NOT_ENOUGH_DATA)  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] A: 7(NOT_ENOUGH_DATA)
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+
+== pair A=dwebp_noasm B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      22
+  both_ok_diff       0
+  A_ok_B_reject      0
+  A_reject_B_ok      0
+  both_reject        16
+  crash_or_timeout   0
+
+== pair A=dwebp_riff B=libwebp_vp8 ==
+  both_ok_same       0
+  both_ok_nocmp      22
+  both_ok_diff       0
+  A_ok_B_reject      3
+  A_reject_B_ok      0
+  both_reject        13
+  crash_or_timeout   0
+  -- A_ok_B_reject (examples) --
+    [1] B: 7 cannot parse partitions
+       examples/empty_last_partition/parts8_one_row_last_empty.vp8
+    [1] B: 7 Premature end-of-file encountered.  <trunc>
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+    [1] B: 7 cannot parse partitions  <trunc>
+       examples/riff_pad_byte_visible/enc_e055_partitions2_syn_gradient_1x1__trunc_19.vp8
+
+== sanitizer reports (decoder, location: message) -> #files, smallest examples ==
+  [dixie_asan] 27  UBSan tokens.c:283:19: left shift of N by N places cannot be represented in type 'int'
+       e.g. gen/tokens.c:283:19: runtime error: left shift of 1 by 31 places cannot be represented in type 'int'
+       examples/eof_token_partition/cwebp_c189_syn_solid_16x16__trunc_39.vp8
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__hdr_b11_00.vp8
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+  [dixie_asan] 25  UBSan predict.c:1382:36: signed integer overflow: N * N cannot be represented in type 'int'
+       e.g. gen/predict.c:1382:36: runtime error: signed integer overflow: 16843009 * 129 cannot be represented in type 'int'
+       examples/eof_token_partition/cwebp_c145_syn_solid_1x1__trunc_34.vp8
+       examples/eof_partition0/cwebp_c145_syn_solid_1x1__p0size_0.vp8
+       examples/seg_update_data0/ext_corpus-src__libwebp-test-data__small_1x1__hdr_b10_bit5.vp8
